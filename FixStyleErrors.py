@@ -30,6 +30,9 @@ def format_file():
 
 
 def regex_style_line(line):
+    # fix arrows
+    line = re.sub("->", "â†’", line)
+
     # fix bullet spacing issues
     if re.match("(?: {0,7}| {9,})-|(?: {0,3}| {5,})â€¢| +â¬¥", line):
         line = re.sub("(?: {0,7}| {9,})-", "        -", line)
@@ -40,8 +43,8 @@ def regex_style_line(line):
     line = re.sub("><", "> <", line)
 
     # fix missing space before/after emoji issues
-    line = re.sub(r"(\w|-|(?:â€¢)|(?:â¬¥))<", r"\g<1> <", line)
-    line = re.sub(r">(\w|-|(?:â€¢)|(?:â¬¥))", r"> \g<1>", line)
+    line = re.sub(r"(\w|-|(?:â€¢)|(?:â¬¥)|(?:â†’))<", r"\g<1> <", line)
+    line = re.sub(r">(\w|-|(?:â€¢)|(?:â¬¥)|(?:â†’))", r"> \g<1>", line)
 
     return line
 
