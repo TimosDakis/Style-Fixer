@@ -43,8 +43,11 @@ def regex_style_line(line):
     line = re.sub("><", "> <", line)
 
     # fix missing space before/after emoji issues
-    line = re.sub(r"(\w|-|(?:â€¢)|(?:â¬¥)|(?:â†’))<", r"\g<1> <", line)
-    line = re.sub(r">(\w|-|(?:â€¢)|(?:â¬¥)|(?:â†’))", r"> \g<1>", line)
+    line = re.sub(r"(/|[a-qt-zA-Z0-9]|-|(?:â€¢)|(?:â¬¥)|(?:â†’))<", r"\g<1> <", line)
+    line = re.sub(r">(/|[a-qt-zA-Z0-9]|-|(?:â€¢)|(?:â¬¥)|(?:â†’))", r"> \g<1>", line)
+    
+    # correct the pre- prefix getting a space added
+    line = re.sub("pre- <", "pre-<", line)
 
     return line
 
